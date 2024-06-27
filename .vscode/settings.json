@@ -1,0 +1,40 @@
+{
+  "editor.accessibilityPageSize": 9,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "editor.accessibilitySupport": "off",
+  "editor.rulers": [80, 120],
+  "workbench.startupEditor": "none",
+  "window.zoomLevel": 0,
+  "editor.fontSize": 14,
+  "explorer.compactFolders": false,
+  "code-runner.runInTerminal": true,
+  "code-runner.clearPreviousOutput": true,
+  "code-runner.executorMap": {
+    "python": "cls ; python -u"
+  },
+
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.fixAll.unusedImports": "explicit",
+    "source.organizeImports": "explicit"
+  },
+
+  "python.formatting.autopep8Args": [
+    "--indent-size=4",
+    "--max-line-length=80"
+    // "ignore=E111"
+  ],
+
+  "code-runner.ignoreSelection": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "python.defaultInterpreterPath": "python",
+  "editor.minimap.enabled": false,
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8"
+  },
+  "python.analysis.typeCheckingMode": "basic",
+  "python.formatting.provider": "none"
+}
