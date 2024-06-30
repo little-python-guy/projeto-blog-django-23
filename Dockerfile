@@ -1,4 +1,4 @@
-FROM python:3.11-alpine3.19
+FROM python:3.11-alpine3.18
 LABEL maintainer="matat201@gmail.com"
 
 # Essa variável de ambiente é usada para controlar se o Python deve
@@ -29,7 +29,7 @@ EXPOSE 8000
 # imagem e torná-la mais eficiente.
 RUN python -m venv /venv && \
     /venv/bin/pip install --upgrade pip && \
-    /venv/bin/pip install -r /django/requirements.txt && \
+    /venv/bin/pip install -r /djangoapp/requirements.txt && \
     adduser --disabled-password --no-create-home duser && \
     mkdir -p /data/web/static && \
     mkdir -p /data/web/media && \

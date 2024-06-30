@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('BD_ENGINE', 'change-me'),
+        'ENGINE': os.getenv('DB_ENGINE', 'change-me'),
         'NAME': os.getenv('POSTGRES_DB', 'change-me'),
         'USER': os.getenv('POSTGRES_USER', 'change-me'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'change-me'),
