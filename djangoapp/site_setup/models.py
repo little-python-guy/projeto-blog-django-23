@@ -11,8 +11,26 @@ class MenuLink(models.Model):
 
     # / /blog /blog/1 /page #id https://
     url_or_path = models.CharField(max_length=2048)
-    
+
     new_tab = models.BooleanField(default=False)
 
     def __str__(self):
         return self.text
+    
+class SiteSetup(models.Model):
+
+    class Meta:
+        verbose_name = 'Setup'
+        verbose_name_plural = 'Setup'
+        
+    title = models.CharField(max_length=65)
+    description = models.CharField(max_length=255)
+
+    show_header = models.BooleanField(default=True)
+    show_search = models.BooleanField(default=True)
+    show_description = models.BooleanField(default=True)
+    show_pagination = models.BooleanField(default=True)
+    show_footer = models.BooleanField(verbose_name='Mostrar Footer', default=True)
+
+    def __str__(self):
+        return self.title
