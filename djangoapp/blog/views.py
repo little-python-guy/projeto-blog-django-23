@@ -5,7 +5,18 @@ def index(request):
     return render(
         request,
         'blog/pages/index.html',
-        # {
-        #     'nome': 'Luiz Otavio'
-        # }
+    )
+
+
+def page(request):
+    return render(
+        request,
+        'blog/pages/page.html',
+    )
+
+
+def post(request):
+    return render(
+        request,
+        'blog/pages/post.html',
     )
