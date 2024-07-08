@@ -34,6 +34,7 @@ class SiteSetup(models.Model):
 
     show_header = models.BooleanField(default=True)
     show_search = models.BooleanField(default=True)
+    show_menu = models.BooleanField(default=True)
     show_description = models.BooleanField(default=True)
     show_pagination = models.BooleanField(default=True)
     show_footer = models.BooleanField(verbose_name='Mostrar Footer', default=True)
