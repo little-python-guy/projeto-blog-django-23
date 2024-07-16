@@ -43,7 +43,7 @@ class Tag(models.Model):
             self.slug = slugify_new(self.name, 4)
 
         return super().save(*args, **kwargs)
-    
+
     def __str__(self):
         return self.name
 
@@ -69,10 +69,9 @@ class Category(models.Model):
             self.slug = slugify_new(self.name, 4)
 
         return super().save(*args, **kwargs)
-    
+
     def __str__(self):
         return self.name
-
 
 
 class Page(models.Model):
@@ -102,15 +101,26 @@ class Page(models.Model):
             self.slug = slugify_new(self.title, 4)
 
         return super().save(*args, **kwargs)
-    
+
     def __str__(self):
         return self.title
+
+
+class PostManager(models.Manager):
+
+    def get_published(self):
+        return self \
+            .filter(is_published=True) \
+            .order_by('-pk')
+
 
 class Post(models.Model):
 
     class Meta:
         verbose_name = "Post"
         verbose_name_plural = "Posts"
+
+    objects = PostManager()
 
     title = models.CharField(max_length=70)
     slug = models.SlugField(
@@ -167,7 +177,7 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     def save(self, *args, **kwargs):
 
         if not self.slug:
