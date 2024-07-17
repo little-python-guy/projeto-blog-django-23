@@ -47,14 +47,22 @@
             </span>
           </span>
         </div>
-        <div class="post-meta-item">
-          <a class="post-meta-link" href="#">
-            <i class="fa-solid fa-tag"></i>
-            <span>
-              Categoria
-            </span>
-          </a>
-        </div>
+
+        {% if post.category %}
+
+          <div class="post-meta-item">
+            <a 
+               class="post-meta-link" 
+               href="{% url "blog:category" post.category.slug %}">
+              <i class="fa-solid fa-tag"></i>
+              <span>
+                {{ post.category.name }}
+              </span>
+            </a>
+          </div>
+
+        {% endif %}
+
       </div>
 
       <p class="single-post-excerpt pb-base">
