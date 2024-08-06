@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.http import Http404, HttpRequest
 from django.shortcuts import redirect, render
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 
 PER_PAGE = 9
 
@@ -166,58 +166,29 @@ class SearchListView(PostListView):
         return super().get(request, *args, **kwargs)
 
 
-
-def search(request):
+class PageDetailView(DetailView):
     
-    search_value = request.GET.get('search', '').strip()
+    model = Page
+    template_name = 'blog/pages/page.html'
+    slug_field = 'slug'
+    context_object_name = 'page'
 
-    posts = (
-        Post.objects.get_published() # type: ignore
-        .filter(
-            # Título contém search_value OU
-            # Excerto contém search_value OU
-            # Conteúdo contém search_value
-            Q(title__icontains=search_value) |
-            Q(excerpt__icontains=search_value) |
-            Q(content__icontains=search_value)
-         )[:PER_PAGE]
-    )
-    
-    page_title = f'{search_value[:30]} - Search - '
+    def get_context_data(self, **kwargs):
 
-    return render(
-        request,
-        'blog/pages/index.html',
-        {
-            'page_obj': posts,
-            'search_value': search_value,
+        ctx = super().get_context_data(**kwargs)
+
+        page = self.get_object()
+        page_title = f'{page.title} - Página - ' # type: ignore
+
+        ctx.update({
             'page_title': page_title,
-        }
-    )
+        }) 
 
-
-def page(request, slug):
-
-    page_obj = (
-        Page.objects
-        .filter(is_published=True)
-        .filter(slug=slug)
-        .first()
-    )
+        return ctx
     
-    if page_obj is None:
-        raise Http404()
+    def get_queryset(self):
 
-    page_title = f'{page_obj.title} - Página - '
-
-    return render(
-        request,
-        'blog/pages/page.html',
-        {
-            'page': page_obj,
-            'page_title': page_title,
-        }
-    )
+        return super().get_queryset().filter(is_published=True)
 
 
 def post(request, slug):
